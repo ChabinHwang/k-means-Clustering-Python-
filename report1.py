@@ -8,12 +8,18 @@ avg = avg / 5
 scan = 2
 print(score)
 while scan != 0:
-  scan = int(input("검색하고 싶은 내용을 선택하세요(0:종료, 1:최고점, 2:최저점, 3:평균"))
+  scan = int(input("검색하고 싶은 내용을 선택하세요(0:종료, 1:최고점, 2:최저점, 3:평균)"))
   if scan == 1:
-    print(f"5명 중 최고점수는{maxScore}입니다.")
+     print(f"5명 중 최고점수는{maxScore}입니다.")
   if scan == 2:
-    print(f"5명 중 최저점수는{minScore}입니다.")
+           print(f"5명 중 최저점수는{minScore}입니다.")
+  if scan==2:
+    print(1231)
+  if scan==3:
+       print(312312)
   if scan == 3:
     print(f"5명의 평균점수는 {avg}입니다.")
-  elif scan < 1 and scan > 3:
+  if scan == 0:
+    print("프로그램을 종료합니다")
+  elif scan < 0 or scan > 3:
     print("잘못 입력하셨습니다.")
