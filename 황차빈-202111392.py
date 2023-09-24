@@ -40,7 +40,7 @@ for i in range(iteration_n):  # JClust라는 배열을 선언
                 dis_sum = dis_sum + ((D[k, l]-rep[j, l])**2)
             temp_dis = math.sqrt(dis_sum)  # 제곱근 반환
             distance = np.append(distance, temp_dis)
-            # distance에 temp_dis를 추가하고, distance배열에 반환 500*16번<이러면 8천번이여야하는데
+            # distance에 temp_dis를 추가하고, distance배열에 반환
     JClust = np.append(JClust, distance.sum()/title_n)
     # JClust배열에 distance값들의 평균을 배열에 추가함
     distance = distance.reshape(K, 500)
