@@ -4,6 +4,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import random as rd
+
+data = pd.read_excel("termDocMatrix.xlsx", engine="openpyxl", header=None)
+K = 9
+# K는 임의의 중심 갯수
+arr = np.array(data)
+row = len(arr)
+col = len(arr[1])
+
+# A열이 nan값이므로, col-1이 총 열수라고 볼 수 있음
+arr2 = np.transpose(arr)
+
+print(row, "row 4423임", col, "col 501", arr[3][5])
+
 random_k = rd.sample(range(1, col), K)
 # 9개 중심점의 문서를 정함
 # 각 중심점과 길이를 비교
