@@ -14,8 +14,7 @@ col = len(arr[1])
 
 
 def vector_distance_calculate(vector1, vector2):  # 두 백터의 거리를 계산하는 함수
-    # A열이 nan값이므로, col-1이 총 열수라고 볼 수 있음
-    return np.linalg.norm(vector2-vector1)
+    return np.linalg.norm(np.array(vector2)-np.array(vector1))
 
 
 def Calculate_Jclust(dictionary, data_arr,  K):  # J클러스트값 계산
