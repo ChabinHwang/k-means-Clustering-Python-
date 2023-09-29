@@ -24,14 +24,16 @@ for m in range(len(arr2)-1):                          #500개의 문서를 9개�
         dist=[vector_distance_calculate(arr2[i]-arr2[m+1])for i in range(K)]
         dictionary[np.argmin(dist)].append(m+1)       # 가장 작은 값의 인덱스(0~8중하나), m은 문서번호(배열상의)를 의미함
 
-#위 for문이 끝나면, 딕셔너리는 4:[2,3,23,413 ....와 같이 분류됨.
-#중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함, 그리고 나서 가상의 중심 만들어야 함.
+#위 for문이 끝나면, 딕셔너리는 1:[5,6,86..], 2:[2,3,23,413..]....와 같이 분류됨.
+Jclust=0
+for m in range(k):                  #중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함
+     arr_tool=dictionary.get[m]     # 4번 중심 그룹을 arr_tool 배열로 받음(인덱스가 모여있음)
 
-arr_tool=dictionary.get[4]     # 4번 중심 그룹을 arr_tool 배열로 받음(인덱스가 모여있음)
-sum_temp=0
-for i in range(len(arr_tool)):	# j클러스트 값 저장
-    sum_temp=sum_temp+vector_distance_calculate(arr2[4]-arr2[arr_tool(i)])
+     for i in range(len(arr_tool)):	# j클러스트 값 저장
+          Jclust=Jclust+vector_distance_calculate(arr2[m]-arr2[arr_tool(i)])
       
+#가상의 중심 만들어야 함.
+
 
 group_list.append(np.argmin(dist))
 
