@@ -26,8 +26,11 @@ for m in range(len(arr2)-1):                          #500개의 문서를 9개�
 
 #위 for문이 끝나면, 딕셔너리는 4:[2,3,23,413 ....와 같이 분류됨.
 #중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함, 그리고 나서 가상의 중심 만들어야 함.
+
 arr_tool=dictionary.get[4]     # 4번 중심 그룹을 arr_tool 배열로 받음(인덱스가 모여있음)
-for i in range(len(arr_tool)):
+sum_temp=0
+for i in range(len(arr_tool)):	# j클러스트 값 저장
+    sum_temp=sum_temp+vector_distance_calculate(arr2[4]-arr2[arr_tool(i)])
       
 
 group_list.append(np.argmin(dist))
