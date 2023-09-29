@@ -17,8 +17,7 @@ def vector_distance_calculate(vector1,vector2):     #두 백터의 거리를 계
 
 arr2 = np.transpose(arr)                # 문서끼리 비교해야 하므로, 한 열의 값을 한번에 불러올 수 없음. 따라서 행과 열을 전치
 random_k = rd.sample(range(1, col), K)  # 1~501사이, K개의 중심점의 좌표를 정함.각 중심점과 길이를 비교
-dictionary= defaultdict(list)           #중심과 그 집합을 모은 딕셔너리 생성
-k = len(random_k)                       # 중심의 갯수
+dictionary= defaultdict(list)           #중심과 그 집합을 모은 딕셔너리 생성     
 
 for m in range(len(arr2)-1):                          #500개의 문서를 9개의 중심들과 거리 비교 후, 가장 짧은 곳 키인덱스:문서인덱스 딕셔너리에 넣음
         dist=[vector_distance_calculate(arr2[i]-arr2[m+1])for i in range(K)]
@@ -26,14 +25,14 @@ for m in range(len(arr2)-1):                          #500개의 문서를 9개�
 
 #위 for문이 끝나면, 딕셔너리는 1:[5,6,86..], 2:[2,3,23,413..]....와 같이 분류됨.
 Jclust=0
-for m in range(k):                  #중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함
+for m in range(K):                  #중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함
      arr_tool=dictionary.get[m]     # m번 중심 그룹을 arr_tool 배열로 받음(인덱스가 모여있음)
 
      for i in range(len(arr_tool)):	# j클러스트 값 저장
           Jclust=Jclust+vector_distance_calculate(arr2[m]-arr2[arr_tool(i)])
       
 #가상의 중심 만들어야 함
-for j in range k:						#j는 몇번째 중심인지 나타냄
+for j in range(K):						#j는 몇번째 중심인지 나타냄
     for i in range(len(arr_tool[j])): #i는 각 딕셔너리 벨류값
         arr_temp=np.add(arr.temp,arr2[arr_tool[j]])	#arr_temp에 그룹원들의 벡터값의 합을 저장
         arr3=np.divide(arr_temp,len(arr_tool[j])#temp를 백터수로나눠서 새로운 중심을 지정(arr3)중요!
