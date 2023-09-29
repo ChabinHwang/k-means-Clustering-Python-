@@ -18,15 +18,16 @@ def vector_distance_calculate(vector1, vector2):  # 두 백터의 거리를 계�
     return np.linalg.norm(vector2-vector1)
 
 
-def Calculate_Jclust(dictionary, data_arr, Jclust, K):  # J클러스트값 계산
-    for m in range(K):  # 중심과 각 그룹의 원소와의 거리를 다 합해서 Jclust값에 더해야 함
+def Calculate_Jclust(dictionary, data_arr,  K):  # J클러스트값 계산
+    clust = 0
+    for m in range(K):  # 중심과 각 그룹의 원소와의 거리를 다 합해서 clust값에 더해야 함
         # m번 중심 그룹을 K_dictionary_value 배열로 받음(인덱스가 모여있음)
-        K_dictionary_value = dictionary.get[m]
+        K_dictionary_value = dictionary.get(m)
         for i in range(len(K_dictionary_value)):     	# j클러스트 값 저장
-            Jclust = Jclust + \
+            clust = clust + \
                 vector_distance_calculate(
-                    data_arr[m]-data_arr[K_dictionary_value(i)])
-    return Jclust  # Jclust값은 K개의 중심에서 나온 모든 값들의 합
+                    data_arr[m], data_arr[K_dictionary_value[i]])
+    return clust  # clust값은 K개의 중심에서 나온 모든 값들의 합
 
 
 def new_center_K(dictionary, data_arr, K):  # 그룹 중심들 다시 잡기
@@ -37,7 +38,7 @@ def new_center_K(dictionary, data_arr, K):  # 그룹 중심들 다시 잡기
             # arr_temp에 그룹원들의 벡터값의 합을 저장,j는 키값(중심)i는 원소
             arr_temp = np.add(arr_temp, data_arr[dictionary[a][i]])
         # temp를 백터수로나눠서 새로운 중심을 지정(arr3)중요
-        arr = np.divide(arr_temp, len(dictionary[j]))
+        arr = np.divide(arr_temp, len(dictionary[a]))
         arr_center.append(arr)  # np.append보다 append가 메모리가 덜 쓰임
     return np.array(arr_center)  # 2차원배열로 중심 백터들 반환(8x4423)
 
@@ -50,33 +51,33 @@ dictionary = defaultdict(list)  # 중심과 그 집합을 모은 딕셔너리 �
 
 for m in range(len(data_arr)-1):  # 500개의 문서를 9개의 중심들과 거리 비교 후, 가장 짧은 곳 키인덱스:문서인덱스 딕셔너리에 넣음
     dist = [vector_distance_calculate(
-        data_arr[i]-data_arr[m+1])for i in range(K)]
+        data_arr[random_k[i]], data_arr[m+1])for i in range(K)]
     # 가장 작은 값의 인덱스(0~8중하나), m은 문서번호(배열상의)를 의미함
     dictionary[np.argmin(dist)].append(m+1)
 
 # 위 for문이 끝나면, 딕셔너리는 1:[5,6,86..], 2:[2,3,23,413..]....와 같이 분류됨.
 Jclust = []
 
-# 1. J클러스터값 더하기
-Jclust.append(Calculate_Jclust(dictionary, data_arr, Jclust, K))
-# 2. 그룹 중심 다시잡기
-center_arr = new_center_K(dictionary, data_arr, K)  # cnter_arr는 중심 벡터들의 모음.
-# 3. 그룹 묶기(딕셔너리초기화)
-dictionary = defaultdict(list)
-for m in range(len(data_arr)-1):  # 500개의 문서를 9개의 중심들과 거리 비교 후, 가장 짧은 곳 키인덱스:문서인덱스 딕셔너리에 넣음
-    dist = [vector_distance_calculate(
-        center_arr[i]-data_arr[m+1])for i in range(K)]  # i부터 k까지, 거리비교
-    # 가장 작은 값의 인덱스(0~8중하나), m은 문서번호(배열상의)를 의미함
-    dictionary[np.argmin(dist)].append(m+1)
+# # 1. J클러스터값 더하기
+# Jclust.append(Calculate_Jclust(dictionary, data_arr, K))
+# # 2. 그룹 중심 다시잡기
+# center_arr = new_center_K(dictionary, data_arr, K)  # cnter_arr는 중심 벡터들의 모음.
+# # 3. 그룹 묶기(딕셔너리초기화)
+# dictionary = defaultdict(list)
+# for m in range(len(data_arr)-1):  # 500개의 문서를 9개의 중심들과 거리 비교 후, 가장 짧은 곳 키인덱스:문서인덱스 딕셔너리에 넣음
+#     dist = [vector_distance_calculate(
+#         center_arr[i]-data_arr[m+1])for i in range(K)]  # i부터 k까지, 거리비교
+#     # 가장 작은 값의 인덱스(0~8중하나), m은 문서번호(배열상의)를 의미함
+#     dictionary[np.argmin(dist)].append(m+1)
 
 # 4. 1>2>3..반복15회..?
 for fin in range(15):
-    Jclust.append(Calculate_Jclust(dictionary, data_arr, Jclust, K))
+    Jclust.append(Calculate_Jclust(dictionary, data_arr, K))
     center_arr = new_center_K(dictionary, data_arr, K)
     dictionary = defaultdict(list)
     for m in range(len(data_arr)-1):  # 500개의 문서를 9개의 중심들과 거리 비교 후, 가장 짧은 곳 키인덱스:문서인덱스 딕셔너리에 넣음
         dist = [vector_distance_calculate(
-            center_arr[i]-data_arr[m+1])for i in range(K)]  # i부터 k까지, 거리비교
+            center_arr[i], data_arr[m+1])for i in range(K)]  # i부터 k까지, 거리비교
         # 가장 작은 값의 인덱스(0~8중하나), m은 문서번호(배열상의)를 의미함
         dictionary[np.argmin(dist)].append(m+1)
 print(Jclust)
