@@ -32,9 +32,15 @@ for m in range(k):                  #중심과 각 그룹의 원소와의 거리
      for i in range(len(arr_tool)):	# j클러스트 값 저장
           Jclust=Jclust+vector_distance_calculate(arr2[m]-arr2[arr_tool(i)])
       
-#가상의 중심 만들어야 함.
-for i in range(len(array_tool
-arr_temp=np.add(arr.temp,arr2[arr_tool(i)])
+#가상의 중심 만들어야 함
+for j in range k:						#j는 몇번째 중심인지 나타냄
+    for i in range(len(arr_tool[j])): #i는 각 딕셔너리 벨류값
+        arr_temp=np.add(arr.temp,arr2[arr_tool[j]])	#arr_temp에 그룹원들의 벡터값의 합을 저장
+        arr3=np.divide(arr_temp,len(arr_tool[j])#temp를 백터수로나눠서 새로운 중심을 지정(arr3)중요!
+
+
+
+
 
 group_list.append(np.argmin(dist))
 
