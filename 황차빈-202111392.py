@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random as rd
 from collections import defaultdict
+import matplotlib.pyplot as plt
 
 data = pd.read_excel("termDocMatrix.xlsx", engine="openpyxl", header=None)
 K = 9                       # K는 임의의 중심 갯수
@@ -74,4 +75,9 @@ for fin in range(15):
             center_arr[i], data_arr[m+1])for i in range(K)]  # i부터 k까지, 거리비교
         dictionary[np.argmin(dist)].append(m+1)
 
+for i in range(len(Jclust)):  # J클러스트값을 문서수로 나누기
+    Jclust[i] = Jclust[i]/(len(data_arr)-1)
+
 print(Jclust)
+plt.plot(Jclust)  # 함수로 표현
+plt.show()
