@@ -61,9 +61,9 @@ center = []
 center = [data_arr[random_k[i]] for i in range(K)]
 center_arr = np.array(center)  # 중심의 배열을 새로 지정해줌
 
-# # 1. J클러스터값 더하기
-# # 2. 그룹 중심 다시잡기
-# # 3. 그룹 묶기(딕셔너리초기화)
+# 1. J클러스터값 더하기
+# 2. 그룹 중심 다시잡기
+# 3. 그룹 묶기(딕셔너리초기화)
 # 4. '1>2>3'반복15회
 for fin in range(15):
     Jclust.append(Calculate_Jclust(dictionary, data_arr, K, center_arr))
