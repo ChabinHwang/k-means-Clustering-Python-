@@ -15,7 +15,8 @@ col = len(arr[1])
 
 
 def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle):
-    for j in range(len(K)):         # 그룹원들과 그 클러스터중심과 비교
+    for j in range(K):         # 그룹원들과 그 클러스터중심과 비교
+        print(j+1, "번째 클러스터를 대표하는 문서명")
         dist = [vector_distance_calculate(
             Cluster_arr[j], data_arr[dictionary.get(j)[i]])for i in range(len(dictionary.get(j)))]
         indices = np.argsort(dist)  # 오름차순했을때, 인덱스반환
@@ -92,7 +93,7 @@ for fin in range(20):
 for i in range(len(Jclust)):  # J클러스트값을 문서수로 나누기
     Jclust[i] = Jclust[i]/(len(data_arr)-1)
 # 문서명 읽기
-title = "word_docTitle.txt"
+title = "word-docTitle.txt"
 start = 4428
 with open(title, "r") as file:
     for _ in range(start-1):
@@ -103,6 +104,5 @@ with open(title, "r") as file:
 cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle)
 
 # 15개의 클러스터(가상의 중심 벡터 그냥 출력), 대표 5개 문서
-print(Jclust)
 plt.plot(Jclust)  # 함수로 표현
 plt.show()
