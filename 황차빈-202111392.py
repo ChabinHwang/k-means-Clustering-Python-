@@ -8,7 +8,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 
 data = pd.read_excel("termDocMatrix.xlsx", engine="openpyxl", header=None)
-K = 15                       # K는 임의의 중심 갯수
+K = 15                       # K는  중심 갯수
 arr = np.array(data)        # arr는 data배열을 numpy배열로 바꿈
 row = len(arr)
 col = len(arr[1])
@@ -16,7 +16,8 @@ col = len(arr[1])
 
 def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle):
     for j in range(K):         # 그룹원들과 그 클러스터중심과 비교
-        print(j+1, "번째 클러스터를 대표하는 문서명")
+        print(j+1, "번째 클러스터", "\n", center_arr[j], "\n")
+        print("클러스터를 대표하는 문서명")
         dist = [vector_distance_calculate(
             Cluster_arr[j], data_arr[dictionary.get(j)[i]])for i in range(len(dictionary.get(j)))]
         indices = np.argsort(dist)  # 오름차순했을때, 인덱스반환
@@ -27,6 +28,7 @@ def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle):
             smallist_indices = indices[:5]
         for i in range(len(smallist_indices)):
             print(docTitle[dictionary.get(j)[smallist_indices[i]]])
+        print("\n")
 
 
 def vector_distance_calculate(vector1, vector2):  # 두 백터의 거리를 계산하는 함수
@@ -47,8 +49,8 @@ def Calculate_Jclust(dictionary, data_arr,  K, center_arr):  # J클러스트값 
 
 def new_center_K(dictionary, data_arr, K):  # 그룹 중심들 다시 잡기
     arr_center = []
-    for a in range(K):  # 0~8까지 중심에 대해 중심 재정의
-        arr_temp = np.zeros_like(data_arr[3])  # data_arr[3]만큼 0으로 초기화
+    for a in range(K):  # K까지 중심에 대해 중심 재정의
+        arr_temp = np.zeros_like(data_arr[3])  # 배열의 열의 수만큼 0으로 초기화
         for i in range(len(dictionary[a])):  # i는 각 딕셔너리 벨류값
             # arr_temp에 그룹원들의 벡터값의 합을 저장,j는 키값(중심)i는 원소
             arr_temp = np.add(arr_temp, data_arr[dictionary[a][i]])
@@ -80,7 +82,7 @@ center_arr = np.array(center)  # 중심의 배열을 새로 지정해줌
 # 2. 그룹 중심 다시잡기
 # 3. 그룹 묶기(딕셔너리초기화)
 # 4. '1>2>3'반복20회
-for fin in range(20):
+for fin in range(19):
     Jclust.append(Calculate_Jclust(dictionary, data_arr, K, center_arr))
     center = new_center_K(dictionary, data_arr, K)
     center_arr = np.array(center)
@@ -101,6 +103,7 @@ with open(title, "r") as file:
     docTitle = [file.readline().strip() for _ in range(len(data_arr)-1)]
 
 # dictionary에 그룹원들이 정리되어 있음. 그룹원들사이에 중심과의 거리를 계산해 상위5개 문서명 출력
+print("-------클러스터(가상의 벡터값)와 클러스터를 대표하는 문서명-------\n\n")
 cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle)
 
 # 15개의 클러스터(가상의 중심 벡터 그냥 출력), 대표 5개 문서
