@@ -14,6 +14,20 @@ row = len(arr)
 col = len(arr[1])
 
 
+def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle):
+    for j in range(len(K)):         # 그룹원들과 그 클러스터중심과 비교
+        dist = [vector_distance_calculate(
+            Cluster_arr[j], data_arr[dictionary.get(j)[i]])for i in range(len(dictionary.get(j)))]
+        indices = np.argsort(dist)  # 오름차순했을때, 인덱스반환
+        if len(dictionary.get(j)) < 5:  # 가장작은 문서 인덱스 반환
+            # 딕셔너리 벨류의 리스트에 인덱스(가장작은5명)
+            smallist_indices = indices[:len(dictionary.get(j))]
+        else:
+            smallist_indices = indices[:5]
+        for i in range(len(smallist_indices)):
+            print(docTitle[dictionary.get(j)[smallist_indices[i]]])
+
+
 def vector_distance_calculate(vector1, vector2):  # 두 백터의 거리를 계산하는 함수
     return np.linalg.norm(np.array(vector2)-np.array(vector1))
 
@@ -37,7 +51,7 @@ def new_center_K(dictionary, data_arr, K):  # 그룹 중심들 다시 잡기
         for i in range(len(dictionary[a])):  # i는 각 딕셔너리 벨류값
             # arr_temp에 그룹원들의 벡터값의 합을 저장,j는 키값(중심)i는 원소
             arr_temp = np.add(arr_temp, data_arr[dictionary[a][i]])
-        # temp를 백터수로나눠서 새로운 중심을 지정(arr3)중요
+        # temp를 백터수로나눠서 새로운 중심을 지정(arr)중요
         arr = np.divide(arr_temp, len(dictionary[a]))
         arr_center.append(arr)  # np.append보다 append가 메모리가 덜 쓰임
     return np.array(arr_center)  # 2차원배열로 중심 백터들 반환(8x4423)
@@ -83,7 +97,12 @@ start = 4428
 with open(title, "r") as file:
     for _ in range(start-1):
         file.readline()
+    docTitle = [file.readline().strip() for _ in range(len(data_arr)-1)]
 
+# dictionary에 그룹원들이 정리되어 있음. 그룹원들사이에 중심과의 거리를 계산해 상위5개 문서명 출력
+cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle)
+
+# 15개의 클러스터(가상의 중심 벡터 그냥 출력), 대표 5개 문서
 print(Jclust)
 plt.plot(Jclust)  # 함수로 표현
 plt.show()
