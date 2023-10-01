@@ -12,3 +12,10 @@ dictionary = {
 
 print(len(data_arr))
 print(10/500)
+title = "word-docTitle.txt"
+start = 4428
+with open(title, "r") as file:
+    for _ in range(start-1):
+        file.readline()
+    lines = [file.readline().strip() for _ in range(num_lines)]
+print(lines)

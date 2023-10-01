@@ -8,7 +8,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 
 data = pd.read_excel("termDocMatrix.xlsx", engine="openpyxl", header=None)
-K = 9                       # K는 임의의 중심 갯수
+K = 15                       # K는 임의의 중심 갯수
 arr = np.array(data)        # arr는 data배열을 numpy배열로 바꿈
 row = len(arr)
 col = len(arr[1])
@@ -64,8 +64,8 @@ center_arr = np.array(center)  # 중심의 배열을 새로 지정해줌
 # 1. J클러스터값 더하기
 # 2. 그룹 중심 다시잡기
 # 3. 그룹 묶기(딕셔너리초기화)
-# 4. '1>2>3'반복15회
-for fin in range(15):
+# 4. '1>2>3'반복20회
+for fin in range(20):
     Jclust.append(Calculate_Jclust(dictionary, data_arr, K, center_arr))
     center = new_center_K(dictionary, data_arr, K)
     center_arr = np.array(center)
@@ -77,6 +77,12 @@ for fin in range(15):
 
 for i in range(len(Jclust)):  # J클러스트값을 문서수로 나누기
     Jclust[i] = Jclust[i]/(len(data_arr)-1)
+# 문서명 읽기
+title = "word_docTitle.txt"
+start = 4428
+with open(title, "r") as file:
+    for _ in range(start-1):
+        file.readline()
 
 print(Jclust)
 plt.plot(Jclust)  # 함수로 표현
