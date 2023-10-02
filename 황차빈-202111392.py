@@ -7,7 +7,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 
 data = pd.read_excel("termDocMatrix.xlsx", engine="openpyxl", header=None)
-K = 15                       # K는  중심 갯수
+K = 9                      # K는  중심 갯수
 arr = np.array(data)        # arr는 data배열을 numpy배열로 바꿈
 row = len(arr)
 col = len(arr[1])
