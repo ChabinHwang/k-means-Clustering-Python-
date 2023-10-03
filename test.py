@@ -1,7 +1,4 @@
-import numpy as np
-
-dist = np.array([1, 3, 2, 4, 0, 6, 7])
-sorted_indices = np.argsort(dist)
-five_smallest_indices = sorted_indices[:5]
-
-print(five_smallest_indices)
+p = int(input("메뉴를 입력해주세요: "))
+while p < 1 or p > 2:
+    print("잘못입력했습니다. 메뉴를 다시 입력해주세요.")
+    p = int(input("메뉴를 입력해주세요: "))
