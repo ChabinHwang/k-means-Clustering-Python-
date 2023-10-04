@@ -112,3 +112,5 @@ cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle)
 
 # 15개의 클러스터(가상의 중심 벡터 출력), 대표 5개 문서
 printGraph(Jclust)
+
+#JClust값 n번째값:뭐다 이렇게 출력
