@@ -110,7 +110,7 @@ with open(title, "r") as file:
 # 클러스터의 위치에 따라, 문서명이 5개가 안될수도 있음
 # dictionary에 그룹원들이 정리되어 있음. 그룹원들사이에 중심과의 거리를 계산해 상위5개 문서명 출력
 print("-------클러스터(가상의 벡터값)와 클러스터를 대표하는 문서명-------\n\n")
-cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle)
+cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle,Jclust)
 
 # 15개의 클러스터(가상의 중심 벡터 출력), 대표 5개 문서
 printGraph(Jclust)
