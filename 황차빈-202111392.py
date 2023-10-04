@@ -56,7 +56,7 @@ def new_center_K(dictionary, data_arr, K):  # 그룹 중심들 다시 잡기
         # temp를 백터수로나눠서 새로운 중심을 지정(arr)중요
         arr = np.divide(arr_temp, len(dictionary[a]))
         arr_center.append(arr)  # np.append보다 append가 메모리가 덜 쓰임
-    return np.array(arr_center)  # 2차원배열로 중심 백터들 반환
+    return np.array(arr_center) 
 
 
 def printGraph(array):  # 그래프 출력
