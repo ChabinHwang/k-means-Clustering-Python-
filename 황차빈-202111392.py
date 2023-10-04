@@ -13,7 +13,7 @@ row = len(arr)
 col = len(arr[1])
 
 
-def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle,Jclust):
+def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle, Jclust):
     for j in range(K):         # 그룹원들과 그 클러스터중심과 비교
         print(str(j+1), "번째 클러스터", "\n", center_arr[j], "\n")
         print("클러스터를 대표하는 문서명")
@@ -27,8 +27,6 @@ def cluster_represent_print(Cluster_arr, data_arr, K, dictionary, docTitle,Jclus
             smallist_indices = indices[:5]
         for i in range(len(smallist_indices)):
             print(docTitle[dictionary.get(j)[smallist_indices[i]]])
-            
-        print(str(j+1),"번째 Jclust값 : ",Jclust[j])
         print("\n")
 
 
@@ -110,7 +108,7 @@ with open(title, "r") as file:
 # 클러스터의 위치에 따라, 문서명이 5개가 안될수도 있음
 # dictionary에 그룹원들이 정리되어 있음. 그룹원들사이에 중심과의 거리를 계산해 상위5개 문서명 출력
 print("-------클러스터(가상의 벡터값)와 클러스터를 대표하는 문서명-------\n\n")
-cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle,Jclust)
+cluster_represent_print(center_arr, data_arr, K, dictionary, docTitle, Jclust)
 
 # 15개의 클러스터(가상의 중심 벡터 출력), 대표 5개 문서
 printGraph(Jclust)
